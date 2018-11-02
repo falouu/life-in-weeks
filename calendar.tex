@@ -41,7 +41,7 @@
 
 \tikzstyle{week}=[
     draw, shape=rectangle,
-    minimum width=4mm, minimum height=4mm
+    minimum width=5mm, minimum height=5mm
 ]
 
 \tikzset{partial/.style n args={1}{
@@ -72,7 +72,7 @@
 \foreach \age in {\firstyear,...,\lastyear} {
 
   % left: year of age
-  \node[anchor=east] at (0,-5mm*\age) {\age};
+  \node[anchor=east] at (0,-6mm*\age) {\age};
   
   % days counter at first day of this year of life
   \setcounter{firstday}{\thedatenumber}
@@ -81,11 +81,11 @@
   \ifnum\value{datedayname}>1
      % partial week
      \setcounter{firstweek}{\the\numexpr8-\value{datedayname}\relax}
-     \node[rotate=180,partial=\thefirstweek] at (5mm,-5mm*\age) {};
+     \node[rotate=180,partial=\thefirstweek] at (6mm,-6mm*\age) {};
   \else
      % full week (starting at monday)
      \setcounter{firstweek}{7}
-     \node[week] at (5mm,-5mm*\age) {};
+     \node[week] at (6mm,-6mm*\age) {};
   \fi
 
   % skip to the day before next birthday
@@ -106,10 +106,10 @@
   % days left in the last week (0...6)
   \addtocounter{daysleft}{-7*\theweeksleft}
   \ifnum\value{daysleft}>0
-     \node[partial=\thedaysleft] at (5mm*\theweeksleft+5mm,-5mm*\age) {};
+     \node[partial=\thedaysleft] at (6mm*\theweeksleft+6mm,-6mm*\age) {};
   \fi
 
-  \pgfmathsetlengthmacro{\endofyear}{5mm*\theweeksleft+2.5mm+5mm*\thedaysleft/7}
+  \pgfmathsetlengthmacro{\endofyear}{6mm*\theweeksleft+3.0mm+6mm*\thedaysleft/7}
 
   % end of year
   \setcounter{tmp}{\thedatenumber}
@@ -120,9 +120,9 @@
   \addtocounter{daysleft}{1}
 
   %\node[color=blue] at (0,-5mm*\age) {\thedaysleft};
-  \pgfmathsetlengthmacro{\newyear}{2.5mm+5mm/7*\thedaysleft-5mm/7*\thefirstweek}
+  \pgfmathsetlengthmacro{\newyear}{3.0mm+6mm/7*\thedaysleft-6mm/7*\thefirstweek}
 
-  \pgfmathsetlengthmacro{\startofyear}{7.5mm-\thefirstweek*5mm/7}
+  \pgfmathsetlengthmacro{\startofyear}{9.0mm-\thefirstweek*6mm/7}
 
   %\draw[thick,color=red] (\endofyear,-5mm*\age+2.5mm) to +(0,-5mm);
   %\draw[thick,color=blue] (\startofyear,-5mm*\age+2.5mm) to +(0,-5mm);
@@ -130,21 +130,21 @@
 
   % draw full weeks
   \foreach \week in {2,...,\theweeksleft}
-    \node[week] at (5mm*\week,-5mm*\age) {};
+    \node[week] at (6mm*\week,-6mm*\age) {};
 
   % right: calendar year at the day before next birthday
   \setdatebynumber{\thetmp}
   \ifodd\thedateyear
     \begin{scope}[on background layer]
       \path[fill=gray!20] 
-        (\startofyear,-5mm*\age+2.5mm) rectangle (\newyear,-5mm*\age-2.5mm); 
+        (\startofyear,-6mm*\age+3.0mm) rectangle (\newyear,-6mm*\age-3.0mm); 
     \end{scope}
   \else
     \begin{scope}[on background layer]
       \path[fill=gray!20] 
-        (\newyear,-5mm*\age-2.5mm) rectangle (\endofyear,-5mm*\age+2.5mm);
+        (\newyear,-6mm*\age-3.0mm) rectangle (\endofyear,-6mm*\age+3.0mm);
     \end{scope}
-    \node[anchor=west] at (52.5*5mm,-5mm*\age) {\thedateyear};
+    \node[anchor=west] at (52.5*6mm,-6mm*\age) {\thedateyear};
   \fi
 
   % skip to next birthday
