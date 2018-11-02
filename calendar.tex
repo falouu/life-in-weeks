@@ -67,12 +67,12 @@
 \newcounter{birthdaymonth}\setcounter{birthdaymonth}{\thedatemonth}
 \newcounter{birthdayday}\setcounter{birthdayday}{\thedateday}
 
-\node[anchor=south east,yshift=1mm] at (0,0) {\scriptsize age};
+\node[anchor=south east,yshift=1mm] at (-4mm,0) {\scriptsize age};
 
 \foreach \age in {\firstyear,...,\lastyear} {
 
   % left: year of age
-  \node[anchor=east] at (0,-6mm*\age) {\age};
+  \node[anchor=east] at (-4mm,-6mm*\age) {\age};
   
   % days counter at first day of this year of life
   \setcounter{firstday}{\thedatenumber}
@@ -81,11 +81,11 @@
   \ifnum\value{datedayname}>1
      % partial week
      \setcounter{firstweek}{\the\numexpr8-\value{datedayname}\relax}
-     \node[rotate=180,partial=\thefirstweek] at (6mm,-6mm*\age) {};
+     \node[rotate=180,partial=\thefirstweek] at (0mm,-6mm*\age) {};
   \else
      % full week (starting at monday)
      \setcounter{firstweek}{7}
-     \node[week] at (6mm,-6mm*\age) {};
+     \node[week] at (0mm,-6mm*\age) {};
   \fi
 
   % skip to the day before next birthday
@@ -122,14 +122,14 @@
   %\node[color=blue] at (0,-5mm*\age) {\thedaysleft};
   \pgfmathsetlengthmacro{\newyear}{3.0mm+6mm/7*\thedaysleft-6mm/7*\thefirstweek}
 
-  \pgfmathsetlengthmacro{\startofyear}{9.0mm-\thefirstweek*6mm/7}
+  \pgfmathsetlengthmacro{\startofyear}{3.0mm-\thefirstweek*6mm/7}
 
   %\draw[thick,color=red] (\endofyear,-5mm*\age+2.5mm) to +(0,-5mm);
   %\draw[thick,color=blue] (\startofyear,-5mm*\age+2.5mm) to +(0,-5mm);
   %\draw[thick,color=green] (\newyear,-5mm*\age+2.5mm) to +(0,-5mm);
 
   % draw full weeks
-  \foreach \week in {2,...,\theweeksleft}
+  \foreach \week in {1,...,\theweeksleft}
     \node[week] at (6mm*\week,-6mm*\age) {};
 
   % right: calendar year at the day before next birthday
